@@ -1,5 +1,7 @@
-def task1():
+from trie import Trie
+
+class Homework(Trie):
     pass
 
 if __name__ == "__main__":
-    task1()
+    print('task1')
