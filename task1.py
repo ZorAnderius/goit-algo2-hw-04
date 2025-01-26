@@ -7,8 +7,19 @@ class Homework(Trie):
 
         current = self.root
         result = []
-        self._collect(current, [], result)
-        return len([w for w in result if w.lower().endswith(suffix.lower())])
+
+        def _collect_with_suffix(node, path, result: list, suffix: str) -> None:
+            if node.value is not None:
+                word = ''.join(path)
+                if word.lower().endswith(suffix.lower()):
+                    result.append(word)
+            for char, next_node in node.children.items():
+                path.append(char)
+                _collect_with_suffix(next_node, path, result, suffix)
+                path.pop()
+
+        _collect_with_suffix(current, [], result, suffix)
+        return len(result)
 
     def has_prefix(self, prefix: str) -> bool:
         if not isinstance(prefix, str) or not prefix:
