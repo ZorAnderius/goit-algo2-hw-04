@@ -12,6 +12,7 @@ class Trie:
         if not isinstance(key, str) or not key:
             raise TypeError(f'Illegal argument for put: key = {key} must be a non-empty string')
         current = self.root
+        key = key.lower()
         for char in key:
             if char not in current.children:
                 current.children[char] = TrieNode()
@@ -24,6 +25,7 @@ class Trie:
         if not isinstance(key, str) or not key:
             raise TypeError(f'Illegal argument for get: key = {key} must be a non-empty string')
         current = self.root
+        key = key.lower()
         for char in key:
             if char not in current.children:
                 return None
@@ -33,6 +35,7 @@ class Trie:
     def delete(self, key: str) -> bool:
         if not isinstance(key, str) or not key:
             raise TypeError(f'Illegal argument for delete: key = {key} must be a non-empty string')
+        key=key.lower()
 
         def _delete(node, key:str, depth: int) -> bool:
             if depth == len(key):
@@ -64,6 +67,7 @@ class Trie:
         if not isinstance(s, str) or not s:
             raise TypeError(f'Illegal argument for longest_prefix_of: s = {s} must be a non-empty string')
 
+        s = s.lower()
         current = self.root
         longest_prefix = ''
         current_prefix = ''
@@ -89,6 +93,7 @@ class Trie:
         if not isinstance(prefix, str) or not prefix:
             raise TypeError(f'Illegal argument for keys_with_prefix: prefix = {prefix} must be a non-empty string')
 
+        prefix = prefix.lower()
         current = self.root
         for char in prefix:
             if char not in current.children:
